@@ -9,13 +9,19 @@ import Router from 'vue-router'
 // import getUserInfo from '@/components/getUserInfo'
 // import orderList from '@/components/orderList'
 // import tel from '@/components/tel'
-import serviceCenterIndex from '@/components/serviceCenter/index.vue'
+import serviceCenterIndex from '@/components/serviceCenter/index/index.vue'
+import mallCalling from '@/components/mall/calling.vue'
 
 Vue.use(Router)
 
 export default new Router({
   // mode:'history',
   routes: [
+    {
+      path:'/mall/calling',
+      name:'mallCalling',
+      component: mallCalling
+    },
     {
       path: '/servicecenter/index',
       name: 'serviceCenterIndex',
