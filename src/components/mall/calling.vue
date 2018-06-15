@@ -1,23 +1,23 @@
 <template>
     <van-row style="overflow-x: hidden">
-        <van-nav-bar title="呼叫管家"/>
+        <van-nav-bar title="呼叫管家" left-arrow @click-left="backTo"/>
 
         <van-list>
             <van-row gutter="20" style="background-color: #ffffff;padding-top: 10px;padding-bottom: 20px;padding-left:15px;padding-right:15px">
-                <van-col span="8" v-for="(item, index) in service" :key=index style="height:90px">
-                    <center>
-                        <!-- <div :class="item.class" style="font-size:40px"  @click="toMenu(item.to)"></div> -->
-                        <p style="font-size: 14px;color: #aaa;margin-top:5px;">{{ item.title }}</p>
+                <van-col span="8" v-for="(item, index) in service" :key=index style="height:90px;padding:25px;color: #aaa" >
+                    <center :class="{select:item.isselect}">
+                        <span :class="item.class" class="iconfont" style="font-size:30px"  @click="choose(index,item)"></span>
+                        <p style="font-size: 12px;margin-top:5px;">{{ item.title }}</p>
                     </center>
                 </van-col>
             </van-row>
         </van-list>
 
-        <van-cell-group>
+        <van-cell-group style="margin:10px;border:1px solid sliver">
             <van-field
                 v-model="message"
                 type="textarea"
-                placeholder="请输入留言"
+                placeholder="清晰的描述可提高我们的服务效率哦！"
                 rows="5"
                 autosize
             />
@@ -32,34 +32,89 @@
                 <van-icon name="info-o" style="margin-right:10px"/>您有费用需要支付！
             </center>
         </van-popup> -->
+        <van-tabbar>
+            <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px" @click="submit">提 交</van-button>
+        </van-tabbar>
     </van-row>
+    
 </template>
 
 <script>
 export default {
     data(){
         return{
+            choose_type:"",
+            message:"",
             service:[
                 {
-                    title:"报修"
+                    title:"报修",
+                    class:"icon-baoxiu",
+                    code:"repair",
+                    isselect:false
                 },
                 {
-                    title:"物品租借"
+                    title:"物品租借",
+                    class:"icon-wupinzujie",
+                    code:"rent",
+                    isselect:false                                   
                 },
                 {
-                    title:"会议室预定"
+                    title:"会议室预定",
+                    class:"icon-huiyishi",
+                    code:"meeting",
+                    isselect:false                                
                 },
                 {
-                    title:"出门证"
+                    title:"出门证",
+                    class:"icon-zhengjian",
+                    code:"certificate",
+                    isselect:false                                   
                 },
                 {
-                    title:"投诉建议"
+                    title:"投诉建议",
+                    class:"icon-tousujianyi",
+                    code:"advice",
+                    isselect:false                                 
                 },
                 {
-                    title:"其他"
+                    title:"其他",
+                    class:"icon-qita",
+                    code:"more",
+                    isselect:false                                    
                 }
             ]
+        }
+    },
+    created(){
+        
+    },
+    methods:{
+        choose(e,v){
+            if(this.service[e].isselect == true){
+                this.service[e].isselect = false
+                this.choose_type = ""
+            }else{
+                for(let i = 0;i<this.service.length;i++){
+                    this.service[i].isselect = false
+                }
+                this.service[e].isselect = true
+                this.choose_type = this.service[e].code
+            }
+        },
+        submit(){
+
+        },
+        backTo(){
+            this.$router.go(-1)
         }
     }
 }
 </script>
+
+<style scoped>
+    @import './iconfont.css';
+    .select{
+        color: red
+    }
+</style>
+

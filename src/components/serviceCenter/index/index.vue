@@ -29,15 +29,15 @@
 
         <div style="margin-top: 5px"></div>
 
-        <div style="padding: 10px 0 0 10px; background-color: #ffff; border-bottom: 1px solid #eeeeee;">
-            <img style="vertical-align:middle;height: 30px; width: 28px;margin-bottom:10px" src="./logo.png"><span style="margin-left: 2%;color: #666666;font-weight:bold;">园区服务</span>
+        <div style="padding: 10px; background-color: #ffff; border-bottom: 1px solid #eeeeee;">
+            <span class="iconfont icon-fuwu"></span><span style="margin-left: 2%;color: #666666;font-weight:bold;">园区服务</span>
         </div>
 
         <van-list>
             <van-row gutter="20" style="background-color: #ffffff;padding-top: 10px;padding-bottom: 20px;padding-left:15px;padding-right:15px">
                 <van-col span="8" v-for="(item, index) in menu" :key=index style="height:90px">
                     <center>
-                        <div :class="item.class" style="font-size:40px"  @click="toMenu(item.to)"></div>
+                        <div :class="item.class" style="font-size:40px"  @click="toMenu(item)"></div>
                         <p style="font-size: 14px;color: #aaa;margin-top:5px;">{{ item.title }}</p>
                     </center>
                 </van-col>
@@ -64,17 +64,18 @@ export default {
             img_swipe:[],
             isInput:true,
             active:1,
-            ispayed:true,
+            // 支付提示
+            ispayed:false,
             menu:[
                 {
                     title:"费用明细",
                     class:"iconfont icon-zhangdan",
-                    to:""
+                    to:"serviceCenterPayList"
                 },
                 {
                     title:"招商信息",
                     class:"iconfont icon-zhaoshang",
-                    to:""
+                    to:"serviceCenterCooperation"
                 },
                 {
                     title:"荣誉榜",
@@ -89,7 +90,7 @@ export default {
                 {
                     title:"园区介绍",
                     class:"iconfont icon-yuanqu",
-                    to:""                    
+                    to:"serviceCenterIntroduce"                    
                 }
             ]
         }
@@ -97,12 +98,61 @@ export default {
     methods:{
         toMenu(e){
             console.log(e)
+            if(e.to=='serviceCenterPayList'){
+                this.$router.push({
+                    name:e.to,
+                    params:{
+                        id:123,
+                        month:7
+                    }
+                })
+            }else{
+                this.$router.push({
+                name:e.to,
+                params:{
+                    userID:123
+                }
+            })
+            }
+        },
+        tochange(e){
+            if(e=='0'){
+                this.$router.push(
+                    // {
+                    //     name:'mallCalling',
+                    //     params:{
+                    //         userID:123
+                    //     }
+                    // }
+                    {path:"/mall/calling/123"}
+                    
+                )
+            }else if(e=='1'){
+                this.$router.push(
+                    // {
+                    //     name:'serviceCenterIndex',
+                    //     params:{
+                    //         userID:123
+                    //     }
+                    // }
+                    {path:"/servicecenter/index/123"}
+                )
+            }else{
+                this.$router.push(
+                    {
+                        name:'serviceCenterIndex',
+                        params:{
+                            userID:123
+                        }
+                    }
+                )
+            }
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
 @import './iconfont.css';
     .imgswipe{
         width: 100%;
