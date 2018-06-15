@@ -15,13 +15,18 @@ import serviceCenterIntroduce from '@/components/serviceCenter/introduce/index.v
 import serviceCenterCooperation from '@/components/serviceCenter/cooperation/index.vue'
 import serviceCenterPayList from '@/components/serviceCenter/paydetail/pay_list.vue'
 import serviceCenterPayDetail from '@/components/serviceCenter/paydetail/detail.vue'
+import serviceCenterPayHistroyDetail from '@/components/serviceCenter/paydetail/history_detail.vue'
+import serviceCenterCompanyList from '@/components/serviceCenter/allcompany/index.vue'
+import serviceCenterCompanyDetail from '@/components/serviceCenter/allcompany/detail.vue'
+
+
 
 
 
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',
+  // mode:'history',
   routes: [
     {
       path: '/',
@@ -52,63 +57,36 @@ export default new Router({
       component: serviceCenterCooperation
     },
     {
-      path: '/servicecenter/paylist/:id/:month',
+      path: '/servicecenter/paylist/:id',
       name: 'serviceCenterPayList',
       component:serviceCenterPayList
     },
-    //  个人中心
-    
-    // {
-    //   path: '/',
-    //   name: 'getUserInfo',
-    //   component: getUserInfo
-    // },
-    // {
-    //   path: '/tel',
-    //   name: 'tel',
-    //   component: tel
-    // },
-    // {
-    //   path: '/HelloWorld',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // },
-    // {
-    //   path: '/searchList',
-    //   name: 'searchList',
-    //   component: searchList
-    // },
-    // {
-    //   path: '/productDetail',
-    //   name: 'productDetail',
-    //   component: productDetail
-    // },
-    // {
-    //   path: '/chat',
-    //   name: 'chat',
-    //   component: chat
-    // },
-    // {
-    //   path: '/productList',
-    //   name: 'productList',
-    //   component: productList
-    // },
-    // {
-    //   path: '/cart',
-    //   name: 'cart',
-    //   component: cart
-    // },
-    // {
-    //   path: '/orderList',
-    //   name: 'orderList',
-    //   component: orderList
-    // },
+    {
+      path: '/servicecenter/paydetail/:id/:month',
+      name: 'serviceCenterPayDetail',
+      component: serviceCenterPayDetail
+    },
+    {
+      path:'/servicecenter/historydetail/:id/:month',
+      name: 'serviceCenterPayHistroyDetail',
+      component: serviceCenterPayHistroyDetail
+    },
+    {
+      path:'/servicecenter/allcompany/list',
+      name: 'serviceCenterCompanyList',
+      component: serviceCenterCompanyList
+    },
+    {
+      path:'/servicecenter/allcompany/list/detail/:id',
+      name: 'serviceCenterCompanyDetail',
+      component: serviceCenterCompanyDetail
+    },
     // 采用history模式，配置全局路由
-      { 
-        path: '*', 
-        redirect: {
-          name:"serviceCenterIndex"
-        } 
-      }
+    { 
+      path: '*', 
+      redirect: {
+        name:"serviceCenterIndex"
+      } 
+    }
   ]
 })

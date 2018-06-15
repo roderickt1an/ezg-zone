@@ -1,6 +1,6 @@
 <template>
     <van-row style="overflow-x: hidden">
-        <van-nav-bar title="服务中心"/>
+        <van-nav-bar title="服务中心" fixed/>
 
         <form action="/" style="height:180px;background-image:url(/static/img/home2/banner.jpg)">
             <!-- <center style="padding-top:25px;color:#202020;letter-spacing:3px;opacity:0.8"><h3>专利交易平台</h3></center> -->
@@ -85,7 +85,7 @@ export default {
                 {
                     title:"企业名录",
                     class:"iconfont icon-qiyeminglu",
-                    to:""                    
+                    to:"serviceCenterCompanyList"                    
                 },
                 {
                     title:"园区介绍",
@@ -102,8 +102,7 @@ export default {
                 this.$router.push({
                     name:e.to,
                     params:{
-                        id:123,
-                        month:7
+                        id:123
                     }
                 })
             }else{

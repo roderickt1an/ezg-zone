@@ -13,6 +13,11 @@ Vue.use(Lazyload);
 
 Vue.prototype.$http = axios
 
+//  回退上一级路由
+Vue.prototype.$backTo = function(){
+  this.$router.go(-1)
+}
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
