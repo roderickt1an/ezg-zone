@@ -80,7 +80,7 @@ export default {
                 {
                     title:"荣誉榜",
                     class:"iconfont icon-jiangbei",
-                    to:""                    
+                    to:"serviceCenterListIndex"                    
                 },
                 {
                     title:"企业名录",

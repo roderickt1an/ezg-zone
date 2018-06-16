@@ -18,6 +18,13 @@ import serviceCenterPayDetail from '@/components/serviceCenter/paydetail/detail.
 import serviceCenterPayHistroyDetail from '@/components/serviceCenter/paydetail/history_detail.vue'
 import serviceCenterCompanyList from '@/components/serviceCenter/allcompany/index.vue'
 import serviceCenterCompanyDetail from '@/components/serviceCenter/allcompany/detail.vue'
+import serviceCenterListIndex from '@/components/serviceCenter/list/index.vue'
+import serviceCenterListList from '@/components/serviceCenter/list/list.vue'
+import serviceCenterListPDetail from '@/components/serviceCenter/list/potentDetail.vue'
+import serviceCenterListHDetail from '@/components/serviceCenter/list/honorDetail.vue'
+
+
+
 
 
 
@@ -80,6 +87,26 @@ export default new Router({
       path:'/servicecenter/allcompany/list/detail/:id',
       name: 'serviceCenterCompanyDetail',
       component: serviceCenterCompanyDetail
+    },
+    {
+      path: '/servicecenter/list/index',
+      name: 'serviceCenterListIndex',
+      component: serviceCenterListIndex
+    },
+    {
+      path: '/servicecenter/list/list/:type',
+      name: 'serviceCenterListList',
+      component: serviceCenterListList
+    },
+    {
+      path: '/servicecenter/list/Pdetail/:id',
+      name: 'serviceCenterListPDetail',
+      component: serviceCenterListPDetail
+    },
+    {
+      path: '/servicecenter/list/Hdetail/:id',
+      name: 'serviceCenterListHDetail',
+      component: serviceCenterListHDetail
     },
     // 采用history模式，配置全局路由
     { 
