@@ -102,7 +102,7 @@ export default {
                 this.$router.push({
                     name:e.to,
                     params:{
-                        id:123
+                        id:"4028805e641c4b0c01641c6acd110028"
                     }
                 })
             }else{

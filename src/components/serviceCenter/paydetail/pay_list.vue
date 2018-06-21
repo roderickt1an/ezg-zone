@@ -4,13 +4,15 @@
         <van-row>
             <van-tabs v-model="active">
                 <van-tab title="待支付订单">
+                    <van-row><center><van-loading color="black" v-if="isloading"/></center></van-row>
                     <van-row>
                         <van-checkbox-group v-model="result">
                             <van-cell-group>
+                                <van-cell v-if="!un_pay_list.length"><center>- 当前无需要支付订单 -</center></van-cell>
                                 <van-cell v-for="(item,index) in un_pay_list" :key="index">
-                                    <van-col span="2"><van-checkbox :name="item.code" /></van-col>
-                                    <van-col span="18"><div @click="open_detail(item)">{{item.title}}</div></van-col>
-                                    <van-col span="4"><div @click="open_detail(item)">￥{{item.total}}</div></van-col>
+                                    <van-col span="2"><van-checkbox :name="item" /></van-col>
+                                    <van-col span="18"><div @click="open_detail(item)">{{item.pay_month}}</div></van-col>
+                                    <van-col span="4"><div @click="open_detail(item)">￥{{item.pay_money}}</div></van-col>
                                     <!-- <van-col span="1" ><van-icon name="arrow" /></van-col>                                     -->
                                 </van-cell>
                             </van-cell-group>
@@ -20,6 +22,7 @@
                 <van-tab title="历史订单">
                     <van-row>
                             <van-cell-group>
+                                <van-cell v-if="!history_list.length"><center>- 无历史订单 -</center></van-cell>                                
                                 <van-cell v-for="(item,index) in history_list" :key="index">
                                     <!-- <van-col span="2"><van-checkbox :name="item.code" /></van-col> -->
                                     <van-col span="20"><div @click="open_history(item)">{{item.title}}</div></van-col>
@@ -51,20 +54,10 @@
 export default {
     data(){
         return {
+            isloading:false,
             active:0,
             result:[],
-            un_pay_list:[
-                {
-                    title:"三月份账单",
-                    total: 100,
-                    code: 3
-                },
-                {
-                    title:"四月份账单",
-                    total: 100,
-                    code: 4
-                }
-            ],
+            un_pay_list:[],
             history_list:[
                 {
                     title:"一月份账单",
@@ -81,7 +74,12 @@ export default {
     },
     computed:{
         totalPrice(){
-            return 10000
+            console.log(this.result)
+            let temp = 0
+            for(let i = 0;i<this.result.length;i++){
+                temp = temp + this.result[i].pay_money
+            }
+            return temp*100
         }
     },
     methods:{
@@ -95,8 +93,8 @@ export default {
                 {
                     name:"serviceCenterPayDetail",
                     params:{
-                        id:this.$route.params.id,
-                        month:e.code
+                        id:e.id,
+                        month:e.pay_month
                     }
                 }
             )
@@ -121,10 +119,39 @@ export default {
         //  申请发票
         submit_fapiao(){
 
+        },
+        getUnpayData(){
+            let _self = this
+            _self.isloading = true
+            let url = `api/tenantPayTotalController.do?getPrePayTenantPayTotalList`
+            let config = {
+                params:{
+                    tenantId:this.$route.params.id
+                }
+            }
+            this.$http.get(url,config).then(function(res){
+                // console.log(res.data.obj)
+                _self.un_pay_list = res.data.obj
+                _self.isloading = false                
+            })
+        },
+        getHistoryData(){
+            let _self = this
+            let url = `api/tenantPayTotalController.do?getHistTenantPayTotalList`
+            let config = {
+                params:{
+                    tenantId:this.$route.params.id
+                }
+            }
+            this.$http.get(url,config).then(function(res){
+                // console.log(res.data.obj)
+                _self.history_list = res.data.obj
+            })
         }
     },
-    // created(){
-    //     alert(this.$route.params.id)
-    // }
+    created(){
+        this.getUnpayData()
+        this.getHistoryData()
+    }
 }
 </script>
