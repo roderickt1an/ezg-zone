@@ -22,7 +22,9 @@ import serviceCenterListIndex from '@/components/serviceCenter/list/index.vue'
 import serviceCenterListList from '@/components/serviceCenter/list/list.vue'
 import serviceCenterListPDetail from '@/components/serviceCenter/list/potentDetail.vue'
 import serviceCenterListHDetail from '@/components/serviceCenter/list/honorDetail.vue'
-
+import getUserInfo from '@/components/index/getUserInfo.vue'
+import personComplainList from '@/components/personCenter/customerService/index.vue'
+import personComplainDetail from '@/components/personCenter/customerService/detail.vue'
 
 
 
@@ -35,10 +37,15 @@ Vue.use(Router)
 export default new Router({
   // mode:'history',
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'getUserInfo',
+    //   component: getUserInfo
+    // },
     {
       path: '/',
       redirect: {
-        name:"serviceCenterIndex"
+        name:'serviceCenterIndex'
       }
     },
     //  企业服务商城
@@ -107,6 +114,16 @@ export default new Router({
       path: '/servicecenter/list/Hdetail/:id',
       name: 'serviceCenterListHDetail',
       component: serviceCenterListHDetail
+    },
+    {
+      path: 'person/complain/:id',
+      name: 'personComplainList',
+      component: personComplainList
+    },
+    {
+      path: 'person/complainDetail/:id',
+      name: 'personComplainDetail',
+      component: personComplainDetail
     },
     // 采用history模式，配置全局路由
     { 

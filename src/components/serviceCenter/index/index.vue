@@ -2,29 +2,12 @@
     <van-row style="overflow-x: hidden">
         <van-nav-bar title="服务中心" />
 
-        <form action="/" style="height:180px;background-image:url(/static/img/home2/banner.jpg)">
-            <!-- <center style="padding-top:25px;color:#202020;letter-spacing:3px;opacity:0.8"><h3>专利交易平台</h3></center> -->
-            <!-- <van-search
-                style="top:10px;background: rgba(0,0,0,0)"
-                v-model="searchvalue"
-                placeholder="输入专利名称搜索"
-                @search="onSearch">
-                <div slot="action" @click="onSearch" style="margin-left:10px;margin-right:10px;color:#666666;">
-                    <van-button type="default" size="small" style="">搜索</van-button></div> -->
-            <!-- </van-search> -->
+        <!-- <form action="/" style="height:180px;background-image:url(/static/img/home2/banner.jpg)"> -->
+        <form action="/" style="height:180px;background-image:url(/static/img/home2/logo.svg)">        
         </form>
-        <!-- <van-swipe :autoplay="3000">
-            <van-swipe-item v-for="(item, index) in img_swipe" :key="index">
-                <img v-lazy="item.src" style="width:100%;height:120px;"/>
-                <img :src="item.src">
-                <div style="width:100%;height:60px">
-                    <p>{{ item.content }}</p>
-                </div>
-            </van-swipe-item>
-        </van-swipe> -->
-
-        <van-row style="padding: 10px; background-color: #ffff; border-bottom: 1px solid #eeeeee;">
-            <center style="margin-left: 2%; color: #666666;font-weight:bold;">广州亿帐柜信息科技有限公司</center>
+        <van-row style="padding: 10px; background-color: #ffff; border-bottom: 1px solid #eeeeee;" >
+            <center style="margin-left: 2%; color: #666666;font-weight:bold;" @click="openSelect">{{showCompanyName}}</center>
+            
         </van-row>
 
         <div style="margin-top: 5px"></div>
@@ -54,6 +37,19 @@
                 <van-icon name="info-o" style="margin-right:10px"/>您有费用需要支付！
             </center>
         </van-popup>
+        <van-dialog
+            v-model="select_company"
+            :show-confirm-button="false"
+            close-on-click-overlay="true"
+            >
+            <van-radio-group v-model="select_company_id">
+                <van-cell-group>
+                    <van-cell v-for="item in companyList" :title="item.name" :key="item.id" clickable @click="choose(item)">
+                    <van-radio :name="item.id" />
+                    </van-cell>
+                </van-cell-group>
+            </van-radio-group>
+        </van-dialog>
     </van-row>
 </template>
 
@@ -61,9 +57,13 @@
 export default {
     data(){
         return{
+            select_company_id:"",
+            showCompanyName:"",
+            select_company:false,
             img_swipe:[],
             isInput:true,
             active:1,
+            companyList:"",
             // 支付提示
             ispayed:false,
             menu:[
@@ -96,20 +96,51 @@ export default {
         }
     },
     methods:{
+        beforeClose(){
+
+        },
+        openSelect(){
+            this.select_company = true
+        },
+        choose(e){
+            this.showCompanyName = e.name
+            this.select_company_id = e.id
+        },
+        getData(){
+            let _self = this
+            let url = `api/customerController.do?getTenantList`
+            let config = {
+                params: {
+                    customerId:"4028805e6402da1d016402dcb93b0002"
+                    // customerId:this.$route.params.id
+                }
+            }
+            this.$http.get(url,config).then(function(res){
+                // console.log(res.data.obj)
+                _self.companyList = res.data.obj
+                _self.showCompanyName = _self.companyList[0].name
+                _self.select_company_id = _self.companyList[0].id
+                for(let i = 0;i<_self.companyList.length;i++){
+                    if(_self.companyList[i].have_pay_money == 1){
+                        _self.ispayed = true
+                    }
+                }
+            })
+        },
         toMenu(e){
-            console.log(e)
+            // console.log(e)
             if(e.to=='serviceCenterPayList'){
                 this.$router.push({
                     name:e.to,
                     params:{
-                        id:"4028805e641c4b0c01641c6acd110028"
+                        id:this.select_company_id
                     }
                 })
             }else{
                 this.$router.push({
                 name:e.to,
                 params:{
-                    userID:123
+                    userID:this.select_company_id
                 }
             })
             }
@@ -141,12 +172,15 @@ export default {
                     {
                         name:'serviceCenterIndex',
                         params:{
-                            userID:123
+                            userID:this.select_company_id
                         }
                     }
                 )
             }
         }
+    },
+    created(){
+        this.getData()
     }
 }
 </script>
