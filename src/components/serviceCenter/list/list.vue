@@ -5,7 +5,7 @@
             <van-cell-group>
                     <van-cell v-for="(item,index) in list" :key="index" @click="openDetail(item.id)">
                         <van-col span="8"><span class="iconfont icon-jiangbei" style="font-size:20px;color:red" :style="item.style"></span></van-col>
-                        <van-col span="16">{{item.companyname}}</van-col>                        
+                        <van-col span="16">{{item.name}}</van-col>                        
                     </van-cell>
                     <van-cell><center>---- 我是有底线的 ----</center></van-cell>
                 </van-cell-group>
@@ -18,27 +18,6 @@ export default {
     data(){
         return{
             list:[
-                {
-                    companyname:"广州市天元中路一号",
-                    id:12345,
-                    style:"color:yellow"
-                },
-                {
-                    companyname:"广州市天元中路一号",
-                    id:12345,
-                    style:"color:sliver"
-                    
-                },
-                {
-                    companyname:"广州市天元中路一号",
-                    id:12345,
-                    style:"color:orange"
-                    
-                },
-                {
-                    companyname:"广州市天元中路一号",
-                    id:12345
-                }
             ]
         }
     },
@@ -83,7 +62,21 @@ export default {
                     }
                 })
             }
+        },
+        getData(){
+            let url = `api/tenantController.do?getGloryList`
+            let _self = this
+            this.$http.get(url).then(function(res){
+                _self.list = res.data.obj
+                console.log(res.data.obj)
+                _self.list[0].style = "color:yellow"
+                _self.list[1].style = "color:sliver"
+                _self.list[2].style = "color:orange"
+            })
         }
+    },
+    created(){
+        this.getData()
     }
 }
 </script>

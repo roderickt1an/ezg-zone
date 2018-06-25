@@ -22,10 +22,10 @@ import serviceCenterListIndex from '@/components/serviceCenter/list/index.vue'
 import serviceCenterListList from '@/components/serviceCenter/list/list.vue'
 import serviceCenterListPDetail from '@/components/serviceCenter/list/potentDetail.vue'
 import serviceCenterListHDetail from '@/components/serviceCenter/list/honorDetail.vue'
-import getUserInfo from '@/components/index/getUserInfo.vue'
+// import getUserInfo from '@/components/index/getUserInfo.vue'
 import personComplainList from '@/components/personCenter/customerService/index.vue'
 import personComplainDetail from '@/components/personCenter/customerService/detail.vue'
-
+import mall from '@/components/mall/mall_index.vue'
 
 
 
@@ -49,6 +49,11 @@ export default new Router({
       }
     },
     //  企业服务商城
+    {
+      path:'/mall/index',
+      name:'mall',
+      component:mall
+    },
     {
       path:'/mall/calling/:id',
       name:'mallCalling',
@@ -116,12 +121,12 @@ export default new Router({
       component: serviceCenterListHDetail
     },
     {
-      path: 'person/complain/:id',
+      path: '/person/complain/:id',
       name: 'personComplainList',
       component: personComplainList
     },
     {
-      path: 'person/complainDetail/:id',
+      path: '/person/complainDetail/:id',
       name: 'personComplainDetail',
       component: personComplainDetail
     },

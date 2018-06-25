@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
+
 export default {
     data(){
         return{
@@ -98,11 +100,29 @@ export default {
                     this.service[i].isselect = false
                 }
                 this.service[e].isselect = true
-                this.choose_type = this.service[e].code
+                this.choose_type = this.service[e].title
             }
         },
         submit(){
+            let _self = this
+            let url = "api/callManagerController.do?createCallManager"
+            // let config = {
+            //     operationType: _self.choose_type,
+            //     decription: _self.message,
+            //     "customer.id": "4028805e6402da1d016402dcb93b0002"
+            // }
+            let data = new FormData()
+            data.append("operationType",_self.choose_type)
+            data.append("decription",_self.message)
+            data.append("customer.id",_self.$route.params.id)
 
+            this.$http.post(url,data).then(function(res){
+                if(res.data.success == true){
+                    Toast.success('提交成功！');
+                }else{
+                    Toast.fail('提交失败！');
+                }
+            })
         },
         backTo(){
             this.$router.go(-1)

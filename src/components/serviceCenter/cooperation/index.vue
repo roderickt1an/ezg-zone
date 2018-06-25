@@ -15,7 +15,18 @@ export default {
     methods:{
         backTo(){
             this.$router.go(-1)
+        },
+        getContent(){
+            let _self = this
+            let url = `api/merchantController.do?getMerchants`
+            this.$http.get(url).then(function(res){
+                console.log(res)
+                _self.content = res.data.obj[0].content
+            })
         }
+    },
+    created(){
+        this.getContent()
     }
 }
 </script>

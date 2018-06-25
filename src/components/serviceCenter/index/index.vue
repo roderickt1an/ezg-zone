@@ -3,11 +3,13 @@
         <van-nav-bar title="服务中心" />
 
         <!-- <form action="/" style="height:180px;background-image:url(/static/img/home2/banner.jpg)"> -->
-        <form action="/" style="height:180px;background-image:url(/static/img/home2/logo.svg)">        
-        </form>
+        <!-- <form action="/" style="height:180px;background-image:url(/static/img/home2/logo.svg)">        
+        </form> -->
+        <div style="height:180px;">
+            <img src="/static/img/home2/logo.svg" alt="" width="100%" height="100%">
+        </div>
         <van-row style="padding: 10px; background-color: #ffff; border-bottom: 1px solid #eeeeee;" >
             <center style="margin-left: 2%; color: #666666;font-weight:bold;" @click="openSelect">{{showCompanyName}}</center>
-            
         </van-row>
 
         <div style="margin-top: 5px"></div>
@@ -40,12 +42,13 @@
         <van-dialog
             v-model="select_company"
             :show-confirm-button="false"
-            close-on-click-overlay="true"
+            :close-on-click-overlay="true"
             >
             <van-radio-group v-model="select_company_id">
                 <van-cell-group>
-                    <van-cell v-for="item in companyList" :title="item.name" :key="item.id" clickable @click="choose(item)">
-                    <van-radio :name="item.id" />
+                    <van-cell v-for="item in companyList" :key="item.id" clickable @click="choose(item)">
+                        <van-col span="22"><div>{{item.name}}</div></van-col>
+                        <van-col span="2"><van-radio :name="item.id" /></van-col>
                     </van-cell>
                 </van-cell-group>
             </van-radio-group>
@@ -111,8 +114,8 @@ export default {
             let url = `api/customerController.do?getTenantList`
             let config = {
                 params: {
-                    customerId:"4028805e6402da1d016402dcb93b0002"
-                    // customerId:this.$route.params.id
+                    // customerId:"4028805e6402da1d016402dcb93b0002"
+                    customerId:this.$route.params.id
                 }
             }
             this.$http.get(url,config).then(function(res){
@@ -140,7 +143,7 @@ export default {
                 this.$router.push({
                 name:e.to,
                 params:{
-                    userID:this.select_company_id
+                    id:this.$route.params.id
                 }
             })
             }
@@ -148,31 +151,31 @@ export default {
         tochange(e){
             if(e=='0'){
                 this.$router.push(
-                    // {
-                    //     name:'mallCalling',
-                    //     params:{
-                    //         userID:123
-                    //     }
-                    // }
-                    {path:"/mall/calling/123"}
+                    {
+                        name:'mallCalling',
+                        params:{
+                            id:this.$route.params.id
+                        }
+                    }
+                    // {path:"/mall/calling/123"}
                     
                 )
             }else if(e=='1'){
                 this.$router.push(
-                    // {
-                    //     name:'serviceCenterIndex',
-                    //     params:{
-                    //         userID:123
-                    //     }
-                    // }
-                    {path:"/servicecenter/index/123"}
+                    {
+                        name:'serviceCenterIndex',
+                        params:{
+                            id:this.$route.params.id
+                        }
+                    }
+                    // {path:"/servicecenter/index/123"}
                 )
             }else{
                 this.$router.push(
                     {
-                        name:'serviceCenterIndex',
+                        name:'personComplainList',
                         params:{
-                            userID:this.select_company_id
+                            id:this.$route.params.id
                         }
                     }
                 )

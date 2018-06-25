@@ -15,7 +15,18 @@ export default {
     methods:{
         backTo(){
             this.$router.go(-1)
+        },
+        getContent(){
+            let _self = this
+            let url = 'api/introductionController.do?getIntroductions'
+            this.$http.get(url).then(function(res){
+                // console.log(res.data.obj[0].introduction)
+                _self.content = res.data.obj[0].introduction
+            })
         }
+    },
+    created(){
+        this.getContent()
     }
 }
 </script>
