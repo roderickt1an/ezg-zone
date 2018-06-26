@@ -1,6 +1,11 @@
 <template>
     <div>
-        <van-row v-html="content"></van-row>
+        <van-row>
+            <van-nav-bar title="园区企业详情" left-arrow @click-left="$backTo()"/>
+            <van-row v-html="content"></van-row>
+        </van-row>
+        
+        
     </div>
 </template>
 

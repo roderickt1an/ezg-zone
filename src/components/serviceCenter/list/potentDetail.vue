@@ -31,10 +31,60 @@
                 <van-row style="margin-top:10px;margin-bottom:10px"><center>---- 我是有底线的 ----</center></van-row>
             </van-tab>
             <van-tab :title="trademark_title">
-                11
+                <van-cell-group style="margin-top:5px">
+                    <van-cell v-for="(item,index) in shangbiao" :key="index" style="margin-top:5px">
+                        <van-row>{{item.MC}}</van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">注册号：</van-col>
+                            <van-col span="16">{{item.RegNo}}</van-col>                            
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">名称：</van-col>
+                            <van-col span="16">{{item.Name}}</van-col>   
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">代理机构：</van-col>
+                            <van-col span="16">{{item.Agent}}</van-col>   
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">所有人：</van-col>
+                            <van-col span="16">{{item.ApplicantCn}}</van-col>   
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">批准日期：</van-col>
+                            <van-col span="16">{{item.AppDate}}</van-col>   
+                        </van-row>                             
+                    </van-cell>
+                </van-cell-group>
+                <van-row style="margin-top:10px;margin-bottom:10px"><center>---- 我是有底线的 ----</center></van-row>
             </van-tab>
             <van-tab :title="soft_title">
-                11
+                <van-cell-group style="margin-top:5px">
+                    <van-cell v-for="(item,index) in ruanzhu" :key="index" style="margin-top:5px">
+                        <van-row>{{item.MC}}</van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">注册号：</van-col>
+                            <van-col span="16">{{item.SoftID}}</van-col>                            
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">名称：</van-col>
+                            <van-col span="16">{{item.SoftName}}</van-col>   
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">版本号：</van-col>
+                            <van-col span="16">{{item.Verson}}</van-col>   
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">类号：</van-col>
+                            <van-col span="16">{{item.TypeNum}}</van-col>   
+                        </van-row>
+                        <van-row gutter="20">
+                            <van-col span="8">批准日期：</van-col>
+                            <van-col span="16">{{item.SuessDate}}</van-col>   
+                        </van-row>                             
+                    </van-cell>
+                </van-cell-group>
+                <van-row style="margin-top:10px;margin-bottom:10px"><center>---- 我是有底线的 ----</center></van-row>
             </van-tab>
         </van-tabs>
     </van-row>

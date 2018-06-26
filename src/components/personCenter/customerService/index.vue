@@ -98,7 +98,6 @@ export default {
                 }
             }
             this.$http.get(url,config).then(function(res){
-                console.log(res)
                 _self.list = res.data.obj
             })
         }
