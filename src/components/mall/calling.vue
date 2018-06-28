@@ -6,7 +6,7 @@
             <van-row gutter="20" style="background-color: #ffffff;padding-top: 10px;padding-bottom: 20px;padding-left:15px;padding-right:15px">
                 <van-col span="8" v-for="(item, index) in service" :key=index style="height:90px;padding:25px;color: #aaa" >
                     <center :class="{select:item.isselect}">
-                        <span :class="item.class" class="iconfont" style="font-size:30px"  @click="choose(index,item)"></span>
+                        <span :class="item.class" style="font-size:30px" class="iconfont" @click="choose(index,item)"></span>
                         <p style="font-size: 12px;margin-top:5px;">{{ item.title }}</p>
                     </center>
                 </van-col>

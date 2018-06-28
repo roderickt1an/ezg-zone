@@ -80,10 +80,11 @@ export default {
             let url = `api/complaintController.do?createComplaint`
             let data = new FormData()
             data.append("decription",_self.message)
-            data.append("customer.id","4028805e6402da1d016402dcb93b0002")
+            data.append("customer.id",_self.$route.params.id)
             this.$http.post(url,data).then(function(res){
                 if(res.data.success == true){
                     Toast.success('提交成功！');
+                    _self.getData()
                 }else{
                     Toast.fail('提交失败！');
                 }

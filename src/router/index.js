@@ -43,7 +43,7 @@ export default new Router({
     //   component: getUserInfo
     // },
     {
-      path: '/',
+      path: '/:id',
       redirect: {
         name:'serviceCenterIndex'
       }

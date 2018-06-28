@@ -24,7 +24,7 @@ export default {
     computed:{
         bar_title(){
             if(this.$route.params.type == "Potential"){
-                return "潜力股"
+                return "成长榜"
             }else{
                 return "荣耀榜"
             }

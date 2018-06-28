@@ -2,7 +2,9 @@
     <van-row style="overflow-x: hidden">
         <van-nav-bar title="园区企业名录" left-arrow @click-left="$backTo()" fixed/>
         <van-row style="margin-top:45px;margin-bottom:50px">
-            <van-search placeholder="搜索企业名称" v-model="companySearch" @search="getData"/>
+            <form action="/">
+                <van-search placeholder="搜索企业名称" v-model="companySearch" @search="getData"/>
+            </form>
             <van-cell-group>
                 <van-cell v-for="(item,index) in company_list" :key="index" @click="open_detail(item.id)">
                     <!-- <van-col span="2" style="visibility:hidden">1</van-col>                         -->
@@ -57,3 +59,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .van-field__clear, .van-field__icon{
+        margin-right:0px
+    }
+</style>
