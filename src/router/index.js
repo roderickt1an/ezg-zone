@@ -27,6 +27,7 @@ import personComplainList from '@/components/personCenter/customerService/index.
 import personComplainDetail from '@/components/personCenter/customerService/detail.vue'
 import mall from '@/components/mall/mall_index.vue'
 
+import meetingIndex from '@/components/mall/meeting/index.vue'
 
 
 
@@ -55,7 +56,7 @@ export default new Router({
       component:mall
     },
     {
-      path:'/mall/calling/:id',
+      path:'/mall/calling/:id/:cpid',
       name:'mallCalling',
       component: mallCalling
     },
@@ -130,12 +131,18 @@ export default new Router({
       name: 'personComplainDetail',
       component: personComplainDetail
     },
+    // 会议室预定
+    {
+      path: '/meeting/index/:cpid',
+      name: 'meetingIndex',
+      component: meetingIndex
+    },
     // 采用history模式，配置全局路由
-    { 
-      path: '*', 
+    {
+      path: '*',
       redirect: {
         name:"serviceCenterIndex"
-      } 
+      }
     }
   ]
 })

@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
         '/api': {
-            target: 'http://192.168.0.222:8080',
+            target: 'http://zonewx.zgcfo.com/api/',
+            // target: 'http://192.168.0.222:8080',
             changeOrigin: true,
             secure: false,
             pathRewrite: {
@@ -29,7 +30,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */

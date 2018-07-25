@@ -4,7 +4,7 @@
             <van-nav-bar title="服务中心" />
 
             <!-- <form action="/" style="height:180px;background-image:url(/static/img/home2/banner.jpg)"> -->
-            <!-- <form action="/" style="height:180px;background-image:url(/static/img/home2/logo.svg)">        
+            <!-- <form action="/" style="height:180px;background-image:url(/static/img/home2/logo.svg)">
             </form> -->
             <div style="height:180px;">
                 <img src="/static/img/home2/logo3.png" alt="" width="100%" height="100%">
@@ -85,25 +85,30 @@ export default {
                 {
                     title:"企业名录",
                     class:"iconfont icon-qiyeminglu",
-                    to:"serviceCenterCompanyList"                    
+                    to:"serviceCenterCompanyList"
                 },
                 {
                     title:"园区介绍",
                     class:"iconfont icon-yuanqu",
-                    to:"serviceCenterIntroduce"                    
+                    to:"serviceCenterIntroduce"
                 },
                 {
                     title:"荣誉榜",
                     class:"iconfont icon-rongyu",
                     to:"serviceCenterListList",
                     type:"Honour"
-            
+
                 },
                 {
                     title:"成长榜",
                     class:"iconfont icon-tubiaozhizuomoban",
                     to:"serviceCenterListList",
-                    type:"Potential"                    
+                    type:"Potential"
+                },
+                {
+                    title:"服务中心",
+                    class:"iconfont icon-tubiaozhizuomoban",
+                    to:"mallCalling",
                 },
             ]
         }
@@ -157,6 +162,14 @@ export default {
                         type:e.type
                     }
                 })
+            }else if(e.to == 'mallCalling'){
+              this.$router.push({
+                 name:e.to,
+                  params:{
+                      id:this.$route.params.id,
+                      cpid:this.select_company_id
+                  }
+              })
             }else{
                 this.$router.push({
                 name:e.to,
@@ -176,7 +189,7 @@ export default {
                 //         // }
                 //     }
                 //     // {path:"/mall/calling/123"}
-                    
+
                 // )
                 window.location.href = "http://m.zgcfo.com"
             }else if(e=='1'){

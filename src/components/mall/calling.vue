@@ -36,7 +36,7 @@
             <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px" @click="submit">提 交</van-button>
         </van-tabbar>
     </van-row>
-    
+
 </template>
 
 <script>
@@ -58,40 +58,48 @@ export default {
                     title:"物品租借",
                     class:"icon-wupinzujie",
                     code:"rent",
-                    isselect:false                                   
+                    isselect:false
                 },
                 {
                     title:"会议室预定",
                     class:"icon-huiyishi",
                     code:"meeting",
-                    isselect:false                                
+                    isselect:false
                 },
                 {
                     title:"出门证",
                     class:"icon-zhengjian",
                     code:"certificate",
-                    isselect:false                                   
+                    isselect:false
                 },
                 {
                     title:"投诉建议",
                     class:"icon-tousujianyi",
                     code:"advice",
-                    isselect:false                                 
+                    isselect:false
                 },
                 {
                     title:"其他",
                     class:"icon-qita",
                     code:"more",
-                    isselect:false                                    
+                    isselect:false
                 }
             ]
         }
     },
     created(){
-        
+
     },
     methods:{
         choose(e,v){
+            if(this.service[e].code == "meeting"){
+                this.$router.push({
+                      name:"meetingIndex",
+                      // params:{
+                      //     type:e.type
+                      // }
+                  })
+            }
             if(this.service[e].isselect == true){
                 this.service[e].isselect = false
                 this.choose_type = ""
