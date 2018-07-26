@@ -20,7 +20,7 @@
             />
         </van-cell-group>
         <van-tabbar>
-            <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px" @click="handle">预约</van-button>
+            <van-button type="primary" bottom-action style="font-size:20px;border-radius:5px" @click="handle" :loading="book_loading">预约</van-button>
         </van-tabbar>
 
         <van-popup v-model="openStartTime" position="bottom">
@@ -74,23 +74,8 @@ import { FULLDateFormat } from '../../common.js'
 export default {
   data(){
     return{
-      bookList:[
-        {
-          room:"301234",
-          startTime:"2017-10-12 13:00:00",
-          endTime:"2017-10-12 13:00:00"
-        },
-        {
-          room:"301234",
-          startTime:"2017-10-12 13:00:00",
-          endTime:"2017-10-12 13:00:00"
-        },
-        {
-          room:"301234",
-          startTime:"2017-10-12 13:00:00",
-          endTime:"2017-10-12 13:00:00"
-        }
-      ],
+      bookList:[],
+      book_loading:false,
       room: "选择会议室",
       roomId: "",
       startTime: "请选择开始时间",
@@ -146,7 +131,7 @@ export default {
     submit(){
       let _self = this
       let url = `api/meetingRoomController.do?appoSave`
-
+      _self.book_loading = true
       let formdata = new FormData()
       formdata.append("meetingRoom.id",_self.roomId)
       formdata.append("tenant.id",_self.customerId)
@@ -157,8 +142,9 @@ export default {
       this.$http.post(url, formdata).then(function(res){
         if(res.data.success){
           _self.$toast.success("预约成功！")
+          _self.book_loading = false
           _self.get_book_list()
-          _self.list = true
+          setTimeout(_self.list = true,1000)
         }else{
           _self.$toast.fail("预约失败！")
         }

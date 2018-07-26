@@ -107,7 +107,7 @@ export default {
                 },
                 {
                     title:"服务中心",
-                    class:"iconfont icon-tubiaozhizuomoban",
+                    class:"iconfont icon-fuwu",
                     to:"mallCalling",
                 },
             ]

@@ -61,18 +61,6 @@ export default {
             message:"",
             show:false,
             list:[
-                {
-                    id:22,
-                    content:"111111"
-                },
-                {
-                    id:23,
-                    content:"222222"
-                },
-                {
-                    id:24,
-                    content:"333333"
-                }
             ],
             show_img:[],
             img_array:[]
